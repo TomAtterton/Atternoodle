@@ -1,4 +1,5 @@
 'use client';
+
 import { GuessObjectType } from '@/components/PlayArea/PlayArea';
 import { Button } from '@/components/ui/button';
 
@@ -11,10 +12,12 @@ const keyboardLetterRows = [
 const KeyButton = ({
   letter,
   onPress,
+  shouldDisableKeyboard,
   backgroundColor,
 }: {
   letter: string;
   onPress: (letter: string) => void;
+  shouldDisableKeyboard: boolean;
   backgroundColor: string;
 }) => {
   const symbols: {
@@ -29,10 +32,11 @@ const KeyButton = ({
 
   return (
     <Button
+      disabled={shouldDisableKeyboard}
       className={`w-8 h-14 lg:w-32 lg:h-20 ${isSpecialKey ? 'bg-gray-300' : backgroundColor} justify-center items-center flex rounded active:bg-gray-800 active:text-gray-300`}
       onClick={() => onPress(letter)}
     >
-      <p className={' text-xl lg:text-3xl md:text-l uppercase'}>{symbol}</p>
+      <p className={'text-xl lg:text-3xl md:text-l uppercase'}>{symbol}</p>
     </Button>
   );
 };
@@ -41,15 +45,18 @@ const KeyboardArea = ({
   className,
   onPress,
   guessObject,
+  shouldDisableKeyboard,
 }: {
   className?: string;
   onPress: (letter: string) => void;
   guessObject: GuessObjectType;
+  shouldDisableKeyboard: boolean;
 }) => {
+  // TODO fix the state of the keyboard letters that correct overwrites maybe and default
+
   const uniqueLetters = Object.values(guessObject)
     .flat()
-    .map((guess) => guess)
-    .reverse();
+    .map((guess) => guess);
 
   return (
     <div className={className}>
@@ -76,6 +83,7 @@ const KeyboardArea = ({
                 key={index}
                 letter={letter}
                 onPress={onPress}
+                shouldDisableKeyboard={shouldDisableKeyboard}
                 backgroundColor={backgroundColor}
               />
             );

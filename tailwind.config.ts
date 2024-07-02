@@ -19,6 +19,8 @@ const config = {
     },
     extend: {
       colors: {
+        success: 'rgb(208,252,190)',
+        successText: 'rgb(0,121,0)',
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',

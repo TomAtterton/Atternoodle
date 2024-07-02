@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { GuessObjectType } from '@/components/PlayArea/PlayArea';
 
 const answers = ['DYLAN', 'DAISY'];
@@ -6,11 +6,16 @@ const ROW_LENGTH = 6;
 
 const usePlayArea = () => {
   const [currentAnswer, setCurrentAnswer] = useState(answers[0]);
+
   const [currentRow, setCurrentRow] = useState(0);
+
   const [guesses, setGuesses] = useState<string[]>([]);
   const [guessObject, setGuessObject] = useState<GuessObjectType>({});
 
+  const confettiRef = useRef<any>(null);
+
   const [showSuccess, setShowSuccess] = useState(false);
+  const [showFailure, setShowFailure] = useState(false);
 
   const handleGuess = (letter: string) => {
     if ('back' === letter) {
@@ -19,10 +24,6 @@ const usePlayArea = () => {
       return;
     }
     if ('enter' === letter) {
-      if (currentRow === ROW_LENGTH - 1) {
-        return;
-      }
-
       if (guesses.length < currentAnswer.length) {
         // TODO add shake animation to indicate that the guess is not complete
         return;
@@ -40,9 +41,18 @@ const usePlayArea = () => {
         return { letter: guess, state: 'default' };
       });
 
-      setGuessObject({ ...guessObject, [currentRow]: newGuessObject });
+      if (currentRow === ROW_LENGTH - 1) {
+        setShowFailure(true);
+        return;
+      }
 
+      if (newGuessObject.every((guess) => guess.state === 'correct')) {
+        setShowSuccess(true);
+        confettiRef.current.fire();
+      }
+      setGuessObject({ ...guessObject, [currentRow]: newGuessObject });
       setGuesses([]);
+
       return;
     }
 
@@ -55,6 +65,7 @@ const usePlayArea = () => {
   };
 
   const handleContinue = () => {
+    setShowFailure(false);
     setShowSuccess(false);
     setCurrentAnswer(answers[1]);
     setCurrentRow(0);
@@ -67,9 +78,11 @@ const usePlayArea = () => {
     currentRow,
     guesses,
     guessObject,
-    showSuccess,
     handleGuess,
     handleContinue,
+    confettiRef,
+    showSuccess,
+    showFailure,
   };
 };
 
