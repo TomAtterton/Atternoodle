@@ -1,9 +1,13 @@
-import PlayArea from '@/components/PlayArea/PlayArea';
+'use client';
+import { redirect } from 'next/navigation';
+import { useGlobalStore } from '@/store';
 
-export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between">
-      <PlayArea />
-    </main>
-  );
+export default function Page() {
+  const state = useGlobalStore();
+
+  if (state?.name) {
+    return redirect('/game');
+  } else {
+    return redirect('/introduction');
+  }
 }

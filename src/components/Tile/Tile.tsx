@@ -23,7 +23,7 @@ const Tile = ({ letter, titleState }: Props) => {
 
   return (
     <div
-      className={`h-14 w-14 lg:h-24 lg:w-24 ${backgroundColor} justify-center items-center flex rounded`}
+      className={`h-14 w-14 lg:h-20 lg:w-20 ${backgroundColor} justify-center items-center flex rounded`}
     >
       <p className={'text-black text-3xl uppercase drop-shadow-md'}>{letter}</p>
     </div>

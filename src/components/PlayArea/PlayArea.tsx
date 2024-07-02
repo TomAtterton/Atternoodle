@@ -29,7 +29,7 @@ const PlayArea = () => {
   // TODO add flip animation to reveal the states of the letters
 
   return (
-    <div className={'flex flex-col items-center min-h-screen justify-around '}>
+    <div className={'flex flex-col items-center min-h-screen '}>
       <div className={'flex gap-2 lg:gap-4 flex-col pb-12'}>
         {new Array(6).fill(null).map((tile, index) => {
           const isActive = currentRow === index;
