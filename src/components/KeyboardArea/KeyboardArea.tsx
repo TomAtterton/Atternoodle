@@ -1,7 +1,7 @@
 'use client';
 
-import { GuessObjectType } from '@/components/PlayArea/PlayArea';
 import { Button } from '@/components/ui/button';
+import { GuessObjectType } from '@/app/game/page';
 
 const keyboardLetterRows = [
   ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],

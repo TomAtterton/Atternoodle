@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import Tile from '@/components/Tile/Tile';
-import { GuessObjectType } from '@/components/PlayArea/PlayArea';
+import { GuessObjectType } from '@/app/game/page';
 
 const Row = ({
   answer,

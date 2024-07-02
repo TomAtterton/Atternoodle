@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 import { useGlobalStore } from '@/store';
 import { useRouter } from 'next/navigation';
+import { onCreateUserForLeaderboard } from '@/actions';
 
 export default function Introduction() {
   const [name, setNameText] = useState('');
@@ -12,29 +13,35 @@ export default function Introduction() {
   const setGameName = useGlobalStore((state) => state.setGameName);
   const router = useRouter();
 
-  const handleAddName = () => {
-    // Check name against duplicate to prevent adding the same name
-    // Check secret to see if it matches what is stored in db
-    // persist name to db
+  const handleAddName = async () => {
+    try {
+      await onCreateUserForLeaderboard(name, gameName.toLowerCase());
 
-    setName(name);
-    setGameName(gameName);
-
-    // Redirect to game page
-    router.push('/game');
+      setName(name);
+      setGameName(gameName);
+      router.push('/game');
+    } catch (error) {
+      // TODO a better error handling mechanism show custom dialog or toast
+      // @ts-ignore
+      alert(error?.message || 'An error occurred');
+    }
   };
+
+  const buttonDisabled = name?.length < 2 || !gameName;
 
   return (
     <main className="flex min-h-screen flex-col items-center ">
       <div className="w-full max-w-xs mt-20">
-        <p className="text-lg font-bold mb-14">Welcome to atternoodle blah blah blah blah</p>
-
+        <p className="text-lg font-bold mb-14">
+          Welcome to AtterNoodle! Ready to test your skills and climb the leaderboard?
+        </p>
         <p className="mb-2">Enter your name</p>
         <input
           value={name}
           onChange={(e) => setNameText(e.target.value)}
           placeholder={'Name'}
           className="w-full py-2 px-3"
+          max={20}
         />
 
         <p className="mt-4 mb-2">Which game are you joining ?</p>
@@ -43,11 +50,12 @@ export default function Introduction() {
           onChange={(e) => setGameNameText(e.target.value)}
           placeholder={'Game Name'}
           className="w-full py-2 px-3"
+          max={20}
         />
 
         <Button
           onClick={handleAddName}
-          disabled={!name || !gameName}
+          disabled={buttonDisabled}
           className=" font-bold py-2 px-4 mt-8"
         >
           Submit

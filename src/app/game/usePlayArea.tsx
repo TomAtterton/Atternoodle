@@ -1,11 +1,14 @@
 import { useRef, useState } from 'react';
-import { GuessObjectType } from '@/components/PlayArea/PlayArea';
+import { setUserScore } from '@/actions';
+import { useGlobalStore } from '@/store';
+import { GuessObjectType } from '@/app/game/page';
 
 const answers = ['DYLAN', 'DAISY'];
 const ROW_LENGTH = 6;
 
 const usePlayArea = () => {
-  const [currentAnswer, setCurrentAnswer] = useState(answers[0]);
+  const { name, gameName, level, setLevel } = useGlobalStore((state) => state);
+  const [currentAnswer, setCurrentAnswer] = useState(answers[level]);
 
   const [currentRow, setCurrentRow] = useState(0);
 
@@ -17,7 +20,7 @@ const usePlayArea = () => {
   const [showSuccess, setShowSuccess] = useState(false);
   const [showFailure, setShowFailure] = useState(false);
 
-  const handleGuess = (letter: string) => {
+  const handleGuess = async (letter: string) => {
     if ('back' === letter) {
       const newGuesses = guesses.slice(0, guesses.length - 1);
       setGuesses(newGuesses);
@@ -28,8 +31,6 @@ const usePlayArea = () => {
         // TODO add shake animation to indicate that the guess is not complete
         return;
       }
-
-      setCurrentRow(currentRow + 1);
 
       const newGuessObject = guesses.map((guess, index) => {
         if (guess === currentAnswer[index]) {
@@ -47,9 +48,16 @@ const usePlayArea = () => {
       }
 
       if (newGuessObject.every((guess) => guess.state === 'correct')) {
+        // start with 6 points and subtract 1 for each row
+        const score = 6 - currentRow;
+
+        await setUserScore(name, gameName, score);
         setShowSuccess(true);
         confettiRef.current.fire();
+      } else {
+        setCurrentRow(currentRow + 1);
       }
+
       setGuessObject({ ...guessObject, [currentRow]: newGuessObject });
       setGuesses([]);
 
@@ -63,11 +71,11 @@ const usePlayArea = () => {
     const newGuesses = [...guesses, letter];
     setGuesses(newGuesses);
   };
-
   const handleContinue = () => {
     setShowFailure(false);
     setShowSuccess(false);
-    setCurrentAnswer(answers[1]);
+    setCurrentAnswer(answers[level + 1]);
+    setLevel(level + 1);
     setCurrentRow(0);
     setGuesses([]);
     setGuessObject({});
