@@ -88,6 +88,10 @@ const config = {
             animationTimingFunction: 'cubic-bezier(0, 0, 0.2, 1)',
           },
         },
+        'slide-in-bottom': {
+          '0%': { transform: 'translateY(100%)' },
+          '100%': { transform: 'translateY(0)' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
@@ -95,6 +99,7 @@ const config = {
         wiggle: 'wiggle 0.5s ease-in-out',
         flip: 'flip 1s ease-in-out',
         bounce: 'bounce 1s ease-in-out',
+        'slide-in-bottom': 'slide-in-bottom 0.5s ease-out forwards',
       },
     },
   },

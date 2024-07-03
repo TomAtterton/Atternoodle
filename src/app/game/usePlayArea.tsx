@@ -59,7 +59,9 @@ const usePlayArea = () => {
       const score = 6 - currentRow;
 
       await setUserScore(name, gameName, score);
-      setShowSuccess(true);
+      setTimeout(() => {
+        setShowSuccess(true);
+      }, 1000);
       confettiRef.current.fire();
     } else {
       setCurrentRow(currentRow + 1);

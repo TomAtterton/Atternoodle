@@ -33,7 +33,7 @@ const Game = () => {
   return hasCompleted ? (
     <GameOver />
   ) : (
-    <div className={'flex flex-col items-center min-h-screen '}>
+    <div className={'flex flex-col items-center min-h-screen'}>
       <div className={'flex gap-2 lg:gap-4 flex-col pb-12'}>
         <h1 className={'text-xl font-bold '}>Level {currentLevel + 1}</h1>
         {new Array(6).fill(null).map((tile, index) => {
@@ -51,9 +51,20 @@ const Game = () => {
           );
         })}
       </div>
+
+      <KeyboardArea
+        className={'gap-4 flex-wrap flex justify-center align-bottom'}
+        onPress={handleGuess}
+        guessObject={guessObject}
+        shouldDisableKeyboard={showSuccess}
+      />
+
+      <ConfettiCanvas ref={confettiRef} />
       {showSuccess && (
         <div
-          className={'flex flex-col items-center absolute bg-success bg p-8 rounded-2xl ml-8 mr-8'}
+          className={
+            'flex flex-col items-center absolute top-1/4 bg-success p-8 rounded-2xl ml-8 mr-8 animate-slide-in-bottom'
+          }
         >
           <h1 className={'text-4xl text-successText font-bold'}>Congratulations!</h1>
           <p className={'text-lg text-gray-800 text-center'}>
@@ -67,7 +78,9 @@ const Game = () => {
 
       {showFailure && (
         <div
-          className={'flex flex-col items-center absolute bg-red-300 bg p-8 rounded-2xl ml-8 mr-8'}
+          className={
+            'flex flex-col items-center absolute top-1/4  bg-red-300  p-8 rounded-2xl ml-8 mr-8 animate-slide-in-bottom'
+          }
         >
           <h1 className={'text-4xl text-failureText font-bold'}>Bad Luck!</h1>
           <p className={'text-lg text-gray-800 text-center'}>
@@ -78,15 +91,6 @@ const Game = () => {
           </Button>
         </div>
       )}
-
-      <KeyboardArea
-        className={'gap-4 flex-wrap flex justify-center align-bottom'}
-        onPress={handleGuess}
-        guessObject={guessObject}
-        shouldDisableKeyboard={showSuccess}
-      />
-
-      <ConfettiCanvas ref={confettiRef} />
     </div>
   );
 };
