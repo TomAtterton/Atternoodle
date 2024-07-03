@@ -33,7 +33,7 @@ const KeyButton = ({
   return (
     <Button
       disabled={shouldDisableKeyboard}
-      className={`w-8 h-14 lg:w-32 lg:h-20 ${isSpecialKey ? 'bg-gray-300' : backgroundColor} justify-center items-center flex rounded active:bg-gray-800 active:text-gray-300`}
+      className={`w-8 h-14 lg:w-32 lg:h-14 ${isSpecialKey ? 'bg-gray-300' : backgroundColor} justify-center items-center flex rounded active:bg-gray-800 active:text-gray-300`}
       onClick={() => onPress(letter)}
     >
       <p className={'text-xl lg:text-3xl md:text-l uppercase'}>{symbol}</p>

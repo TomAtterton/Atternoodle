@@ -22,8 +22,7 @@ export default function Settings() {
   const leaderboard = useGlobalStore((state) => state.gameName);
 
   return (
-    <main className="flex min-h-screen flex-col items-center">
-      <p className={'text-xl font-bold mb-14'}>Settings</p>
+    <main className="flex min-h-screen flex-col items-center mt-14">
       <div className={'flex flex-col gap-8'}>
         <div className={'flex'}>
           <p className={'font-extrabold pr-4'}> Username: </p>
