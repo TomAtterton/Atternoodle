@@ -1,13 +1,13 @@
-'use client';
-
-import { useMemo } from 'react';
+import React, { useMemo } from 'react';
 
 interface Props {
   letter?: string;
   titleState?: 'default' | 'correct' | 'maybe';
+  shouldWiggle?: boolean;
+  shouldBounce?: boolean;
 }
 
-const Tile = ({ letter, titleState }: Props) => {
+const Tile = ({ letter, titleState, shouldWiggle, shouldBounce }: Props) => {
   const backgroundColor = useMemo(() => {
     switch (titleState) {
       case 'default':
@@ -21,9 +21,12 @@ const Tile = ({ letter, titleState }: Props) => {
     }
   }, [titleState]);
 
+  const animationWiggle = shouldWiggle ? 'animate-wiggle' : '';
+  const animationBounce = shouldBounce ? 'animate-bounce' : '';
   return (
     <div
-      className={`h-14 w-14 lg:h-20 lg:w-20 ${backgroundColor} justify-center items-center flex rounded`}
+      id={`tile-${letter}`}
+      className={`h-14 w-14 lg:h-20 lg:w-20 ${backgroundColor} justify-center items-center flex rounded ${animationWiggle} ${animationBounce}`}
     >
       <p className={'text-black text-3xl uppercase drop-shadow-md'}>{letter}</p>
     </div>

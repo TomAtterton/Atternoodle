@@ -69,10 +69,32 @@ const config = {
           from: { height: 'var(--radix-accordion-content-height)' },
           to: { height: '0' },
         },
+        wiggle: {
+          '0%, 100%': { transform: 'rotate(-3deg)' },
+          '50%': { transform: 'rotate(3deg)' },
+        },
+        flip: {
+          '0%': { transform: 'rotateX(0deg)' },
+          '50%': { transform: 'rotateX(180deg)' },
+          '100%': { transform: 'rotateX(360deg)' },
+        },
+        bounce: {
+          '0%, 100%': {
+            transform: 'translateY(-25%)',
+            animationTimingFunction: 'cubic-bezier(0.8, 0, 1, 1)',
+          },
+          '50%': {
+            transform: 'translateY(0)',
+            animationTimingFunction: 'cubic-bezier(0, 0, 0.2, 1)',
+          },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+        wiggle: 'wiggle 0.5s ease-in-out',
+        flip: 'flip 1s ease-in-out',
+        bounce: 'bounce 1s ease-in-out',
       },
     },
   },

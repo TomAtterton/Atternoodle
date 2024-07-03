@@ -20,25 +20,22 @@ const Game = () => {
     guesses,
     guessObject,
     handleGuess,
-    confettiRef,
     showSuccess,
     handleContinue,
     showFailure,
+    shouldWiggle,
+    confettiRef,
   } = usePlayArea();
 
   const currentLevel = useGlobalStore((state) => state.level);
-
   const hasCompleted = !currentAnswer;
-  // TODO add a shake animation to the keyboard when the guess is not complete
-
-  // TODO add flip animation to reveal the states of the letters
 
   return hasCompleted ? (
     <GameOver />
   ) : (
     <div className={'flex flex-col items-center min-h-screen '}>
       <div className={'flex gap-2 lg:gap-4 flex-col pb-12'}>
-        <h1 className={'text-4xl font-bold text-center'}>Level {currentLevel + 1}</h1>
+        <h1 className={'text-xl font-bold '}>Level {currentLevel + 1}</h1>
         {new Array(6).fill(null).map((tile, index) => {
           const isActive = currentRow === index;
           return (
@@ -49,6 +46,7 @@ const Game = () => {
               isActive={isActive}
               guesses={guesses}
               guessObject={guessObject}
+              shouldWiggle={isActive && shouldWiggle}
             />
           );
         })}
