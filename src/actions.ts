@@ -98,7 +98,7 @@ export const onFetchLeaderboardScores = async (leaderboardName: string) => {
 export const onCreateLeaderboard = async () => {
   const response = await kv.set('leaderboards', {
     atterton25: {
-      id: 'atterton25',
+      id: process.env.GAME_NAME || 'default',
       name: 'Atterton 25',
       scores: {},
     },

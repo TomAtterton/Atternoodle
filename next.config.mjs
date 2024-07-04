@@ -7,6 +7,7 @@ const nextConfig = {
         KV_REST_API_READ_ONLY_TOKEN: process.env.KV_REST_API_READ_ONLY_TOKEN,
         ADMIN_USERNAME: process.env.ADMIN_USERNAME,
         ADMIN_PASSWORD: process.env.ADMIN_PASSWORD,
+        GAME_NAME: process.env.GAME_NAME,
     }
 };
 

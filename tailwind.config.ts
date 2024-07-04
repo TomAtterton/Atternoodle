@@ -1,5 +1,7 @@
 import type { Config } from 'tailwindcss';
 
+const plugin = require('tailwindcss/plugin');
+
 const config = {
   darkMode: ['class'],
   content: [
@@ -55,6 +57,7 @@ const config = {
           foreground: 'hsl(var(--card-foreground))',
         },
       },
+
       borderRadius: {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
@@ -103,7 +106,19 @@ const config = {
       },
     },
   },
-  plugins: [require('tailwindcss-animate')],
+  plugins: [
+    require('tailwindcss-animate'),
+    plugin(function ({ addUtilities }: Config) {
+      const newUtilities = {
+        '.heart-mask': {
+          mask: 'radial-gradient(at 70% 31%,#000 29%,#0000 30%),radial-gradient(at 30% 31%,#000 29%,#0000 30%),linear-gradient(#000 0 0) bottom/100% 50% no-repeat;',
+          'clip-path': 'polygon(-43% 0, 50% 91%, 143% 0)',
+          overflow: 'hidden',
+        },
+      };
+      addUtilities(newUtilities, ['responsive', 'hover']);
+    }),
+  ],
 } satisfies Config;
 
 export default config;

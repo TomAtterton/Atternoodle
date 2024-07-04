@@ -8,10 +8,19 @@ import ConfettiCanvas from '@/components/ConfettiCanvas/confetti-canvas';
 import { Button } from '@/components/ui/button';
 import { useGlobalStore } from '@/store';
 import GameOver from '@/components/game-over/GameOver';
+import Image from 'next/image';
 
 export type GuessObjectType = {
   [key: string]: { letter: string; state: 'default' | 'correct' | 'maybe' }[];
 };
+
+const congratsImages = [
+  require('../../assets/congratulations/congratulations_1.jpg'),
+  require('../../assets/congratulations/congratulations_2.jpg'),
+  require('../../assets/congratulations/congratulations_3.jpg'),
+  require('../../assets/congratulations/congratulations_4.jpg'),
+  require('../../assets/congratulations/congratulations_5.jpg'),
+];
 
 const Game = () => {
   const {
@@ -61,34 +70,42 @@ const Game = () => {
 
       <ConfettiCanvas ref={confettiRef} />
       {showSuccess && (
-        <div
-          className={
-            'flex flex-col items-center absolute top-1/4 bg-success p-8 rounded-2xl ml-8 mr-8 animate-slide-in-bottom'
-          }
-        >
-          <h1 className={'text-4xl text-successText font-bold'}>Congratulations!</h1>
-          <p className={'text-lg text-gray-800 text-center'}>
-            You have successfully guessed the word
-          </p>
-          <Button onClick={handleContinue} className={'mt-4'}>
-            Next Level
-          </Button>
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="flex flex-col items-center justify-center bg-green-100 p-6 rounded-2xl shadow-lg animate-slide-in-bottom gap-4 mx-4 max-w-sm md:max-w-md lg:max-w-lg">
+            <h1 className="text-3xl md:text-4xl font-bold text-green-800 text-center">
+              Congratulations!
+            </h1>
+            <Image
+              src={congratsImages[Math.floor(Math.random() * congratsImages.length)]}
+              alt="image"
+              className="rounded-2xl w-full h-auto"
+            />
+            <Button
+              onClick={handleContinue}
+              className="mt-4 bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600"
+            >
+              Next Level
+            </Button>
+          </div>
         </div>
       )}
 
       {showFailure && (
-        <div
-          className={
-            'flex flex-col items-center absolute top-1/4  bg-red-300  p-8 rounded-2xl ml-8 mr-8 animate-slide-in-bottom'
-          }
-        >
-          <h1 className={'text-4xl text-failureText font-bold'}>Bad Luck!</h1>
-          <p className={'text-lg text-gray-800 text-center'}>
-            You have failed to guess the word on to the next one
-          </p>
-          <Button onClick={handleContinue} className={'mt-4'}>
-            Next Level
-          </Button>
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="flex flex-col items-center justify-center bg-red-300 p-6 rounded-2xl shadow-lg animate-slide-in-bottom gap-4 mx-4 max-w-sm md:max-w-md lg:max-w-lg">
+            <h1 className="text-3xl md:text-4xl text-red-800 font-bold text-center">Keep Going!</h1>
+            <Image
+              src={require('../../assets/next-time/next_time.jpg')}
+              alt="Encouragement"
+              className="rounded-2xl w-full h-auto"
+            />
+            <Button
+              onClick={handleContinue}
+              className="mt-4 bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600"
+            >
+              Next Level
+            </Button>
+          </div>
         </div>
       )}
     </div>

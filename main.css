@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+    .potato {
+        clip-path: polygon(50% 0%, 61% 4%, 71% 11%, 78% 20%, 83% 30%, 85% 41%, 85% 52%, 84% 63%, 80% 73%, 73% 80%, 64% 85%, 50% 90%, 36% 85%, 27% 80%, 20% 73%, 16% 63%, 15% 52%, 15% 41%, 17% 30%, 22% 20%, 29% 11%, 39% 4%);
+        display: inline-block;
+        width: 720px;
+        height: 720px;
+        overflow: hidden;
+    }
+}
