@@ -3,7 +3,7 @@ import { setUserScore } from '@/actions';
 import { useGlobalStore } from '@/store';
 import { GuessObjectType } from '@/app/game/page';
 
-const answers = ['DYLAN', 'DAISY', 'BIKES', 'HOUSE', 'RINGS', 'CAKES', 'DOLLY', 'HEART'];
+const answers = ['HARLEY', 'DYLAN', 'DAISY', 'BIKES', 'HOUSE', 'RINGS', 'CAKES', 'DOLLY', 'HEART'];
 const ROW_LENGTH = 6;
 
 const usePlayArea = () => {

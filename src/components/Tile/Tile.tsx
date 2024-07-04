@@ -5,9 +5,10 @@ interface Props {
   titleState?: 'default' | 'correct' | 'maybe';
   shouldWiggle?: boolean;
   shouldBounce?: boolean;
+  tileSize: string;
 }
 
-const Tile = ({ letter, titleState, shouldWiggle, shouldBounce }: Props) => {
+const Tile = ({ letter, titleState, shouldWiggle, shouldBounce, tileSize }: Props) => {
   const backgroundColor = useMemo(() => {
     switch (titleState) {
       case 'default':
@@ -26,7 +27,7 @@ const Tile = ({ letter, titleState, shouldWiggle, shouldBounce }: Props) => {
   return (
     <div
       id={`tile-${letter}`}
-      className={`h-14 w-14 lg:h-20 lg:w-20 ${backgroundColor} justify-center items-center flex rounded ${animationWiggle} ${animationBounce}`}
+      className={`${tileSize} lg:h-20 lg:w-20 ${backgroundColor} justify-center items-center flex rounded ${animationWiggle} ${animationBounce}`}
     >
       <p className={'text-black text-3xl uppercase drop-shadow-md'}>{letter}</p>
     </div>
