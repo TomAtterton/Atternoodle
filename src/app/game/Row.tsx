@@ -33,6 +33,8 @@ const Row = ({
         return 'h-12 w-12';
       case 7:
         return 'h-10 w-10';
+      default:
+        return 'h-10 w-10';
     }
   }, [answerLength]);
 

@@ -9,6 +9,8 @@ interface GlobalStore {
   setGameName: (gameName: string) => void;
   setLevel: (level: number) => void;
   clear: () => void;
+  isAdmin: boolean;
+  setIsAdmin: (isAdmin: boolean) => void;
 }
 
 export const useGlobalStore = create<GlobalStore>()(
@@ -17,10 +19,12 @@ export const useGlobalStore = create<GlobalStore>()(
       name: '',
       gameName: '',
       level: 0,
+      isAdmin: false,
       setName: (name: string) => set({ name }),
       setGameName: (gameName: string) => set({ gameName }),
       setLevel: (level: number) => set({ level }),
       clear: () => set({ name: '', gameName: '', level: 0 }),
+      setIsAdmin: (isAdmin: boolean) => set({ isAdmin }),
     }),
     {
       name: 'atternoodle-storage',
