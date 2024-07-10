@@ -1,16 +1,16 @@
 'use client';
 
 import KeyboardArea from '@/components/KeyboardArea/KeyboardArea';
-import Row from './row';
 
 import usePlayArea from './usePlayArea';
-import ConfettiCanvas from '@/components/ConfettiCanvas/confetti-canvas';
+import ConferttiCanvas from '@/components/ConfettiCanvas/ConferttiCanvas';
 import { Button } from '@/components/ui/button';
 import { useGlobalStore } from '@/store';
-import GameOver from '@/components/game-over/GameOver';
+import GameOver from '@/components/GameOver/GameOver';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import Row from '@/components/Row/Row';
 
 export type GuessObjectType = {
   [key: string]: { letter: string; state: 'default' | 'correct' | 'maybe' }[];
@@ -78,7 +78,7 @@ const Game = () => {
         shouldDisableKeyboard={showSuccess}
       />
 
-      <ConfettiCanvas ref={confettiRef} />
+      <ConferttiCanvas ref={confettiRef} />
       {showSuccess && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="flex flex-col items-center justify-center bg-green-100 p-6 rounded-2xl shadow-lg animate-slide-in-bottom gap-4 mx-4 max-w-sm md:max-w-md lg:max-w-lg">

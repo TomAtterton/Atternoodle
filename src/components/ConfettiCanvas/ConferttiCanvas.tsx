@@ -5,7 +5,7 @@ import { TCanvasConfettiInstance } from 'react-canvas-confetti/src/types/normali
 import { Options } from 'canvas-confetti';
 
 // eslint-disable-next-line react/display-name
-const ConfettiCanvas = forwardRef(({}, ref) => {
+const ConferttiCanvas = forwardRef(({}, ref) => {
   const refAnimationInstance = useRef<TCanvasConfettiInstance>();
 
   useImperativeHandle(ref, () => ({
@@ -60,4 +60,4 @@ const ConfettiCanvas = forwardRef(({}, ref) => {
   );
 });
 
-export default ConfettiCanvas;
+export default ConferttiCanvas;
