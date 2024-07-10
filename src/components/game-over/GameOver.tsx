@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 const GameOver = () => {
   const router = useRouter();
@@ -9,6 +10,13 @@ const GameOver = () => {
       <p className="text-lg text-gray-200 text-center mt-2">
         You have successfully completed the game
       </p>
+
+      <Image
+        src={require('../../assets/congratulations/congratulations_4.jpg')}
+        alt={'congratulations_image'}
+        className={' mt-8 w-full max-w-md h-auto heart-mask'}
+      />
+
       <Button
         onClick={() => router.push('/leaderboard')}
         className="mt-4  font-bold py-2 px-4 rounded"

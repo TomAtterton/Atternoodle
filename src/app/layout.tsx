@@ -18,6 +18,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <title>AtterNoodle</title>
+        <link rel="icon" href="/icon.svg" type={'image/svg'} sizes={'32x32'} />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </head>
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <NavBar />

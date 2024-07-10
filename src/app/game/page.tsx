@@ -1,7 +1,7 @@
 'use client';
 
 import KeyboardArea from '@/components/KeyboardArea/KeyboardArea';
-import Row from './Row';
+import Row from './row';
 
 import usePlayArea from './usePlayArea';
 import ConfettiCanvas from '@/components/ConfettiCanvas/confetti-canvas';
@@ -9,6 +9,8 @@ import { Button } from '@/components/ui/button';
 import { useGlobalStore } from '@/store';
 import GameOver from '@/components/game-over/GameOver';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 export type GuessObjectType = {
   [key: string]: { letter: string; state: 'default' | 'correct' | 'maybe' }[];
@@ -35,6 +37,14 @@ const Game = () => {
     shouldWiggle,
     confettiRef,
   } = usePlayArea();
+
+  const name = useGlobalStore((state) => state.name);
+  const router = useRouter();
+  useEffect(() => {
+    if (!name) {
+      router.push('/');
+    }
+  }, [name, router]);
 
   const currentLevel = useGlobalStore((state) => state.level);
   const hasCompleted = !currentAnswer;
